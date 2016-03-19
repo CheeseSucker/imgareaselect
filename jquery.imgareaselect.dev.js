@@ -983,7 +983,11 @@ $.imgAreaSelect = function (img, options) {
         }
 
         /* Calculate the aspect ratio factor */
-        aspectRatio = (d = (options.aspectRatio || '').split(/:/))[0] / d[1];
+        if ($.type(options.aspectRatio) === "string" && options.aspectRatio.indexOf(':') > -1) {
+            aspectRatio = (d = (options.aspectRatio || '').split(/:/))[0] / d[1];
+        } else {
+            aspectRatio = parseFloat(options.aspectRatio);
+        }
 
         $img.add($outer).unbind('mousedown', imgMouseDown);
         
